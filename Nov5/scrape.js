@@ -17,12 +17,21 @@ $(document).ready(function () {
             console.log('ask:', ask);
             console.log('change:', change);
             console.log('changeP:', changeP);
+            var stockColor;
+            if (change.indexOf('-') > -1 && changeP.indexOf('-') > -1) {
+                stockColor = 'redstock';
+            } else {
+                stockColor = 'greenstock';
+            }
             var element = $('<span class="quote"></span>');
             element.append('<span class="top-bar-text">Gold</span>');
             element.append('<span class="bold top-bar-text">$' + parseFloat(ask).toFixed(2) + '</span>');
-            element.append('<span class"' + {color} + ' top-bar-text"> ' + {change} + ' (' + {changeP} + ') </span>');
+            element.append('<span class"' + stockColor + ' top-bar-text"> ' + change + ' (' + changeP + ') </span>');
             var quotes = $('.quote');
-            if (quotes.length > 0)
+            if (quotes.length < symbols.length) {
+                element.append('<span class="top-bar-text">' + '|' + '</span> ');
+            }
+            element.appendTo('.quotes');
         }
     });
 });
